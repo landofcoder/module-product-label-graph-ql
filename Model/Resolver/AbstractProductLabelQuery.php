@@ -23,51 +23,53 @@ declare(strict_types=1);
 
 namespace Lof\ProductLabelGraphQl\Model\Resolver;
 
-use Exception;
+use Magento\Framework\GraphQl\Query\Resolver\Argument\SearchCriteria\Builder as SearchCriteriaBuilder;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\GraphQl\Exception\GraphQlInputException;
 use Lof\ProductLabel\Api\LabelRepositoryInterface;
 
 /**
- * Class AbstractGiftQuery
- * @package Lof\GiftSaleRuleGraphQl\Model\Resolver
+ * Class AbstractProductLabelQuery
+ *
+ * @package Lof\ProductLabelGraphQl\Model\Resolver
  */
-abstract class AbstractGiftQuery
+abstract class AbstractProductLabelQuery
 {
+    /**
+     * @var SearchCriteriaBuilder
+     */
+    protected $searchCriteriaBuilder;
+
     /**
      * @var LabelRepositoryInterface
      */
-    protected $_productLabel;
-    
+    protected $_labelRepository;
+
     /**
      * @var ProductRepositoryInterface
      */
     protected $_productRepository;
-    
 
     /**
      * @var int
      */
-    protected $_productItemFlag;
+    protected $_labelFlag;
 
-    /**
-     * @var int
-     */
-    protected $_categoryItemFlag;
-    
     /**
      * AbstractGift constructor.
      * @param LabelRepositoryInterface $productLabel
      * @param ProductRepositoryInterface $productRepository
      */
     public function __construct(
+        SearchCriteriaBuilder $searchCriteriaBuilder,
         LabelRepositoryInterface $productLabel,
         ProductRepositoryInterface $productRepository
     ) {
-        $this->_productLabel = $productLabel;
+        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+        $this->_labelRepository = $productLabel;
         $this->_productRepository = $productRepository;
     }
-    
+
     /**
      * @param array $args
      *
@@ -75,25 +77,8 @@ abstract class AbstractGiftQuery
      */
     protected function validateArgs(array $args)
     {
-        if ($this->_productItemFlag && !isset($args['sku'])) {
-            throw new GraphQlInputException(__('product id is required.'));
-        }
-        if ($this->_productItemFlag) {
-            $this->_productItemFlag = $this->_productRepository->get($args['sku'])->getId(); // get product id by sku
-            if (!$this->_productItemFlag) {
-                throw new GraphQlInputException(__('This product item does not exist.'));
-            }
-        }
-        
-        if ($this->_categoryItemFlag && !isset($args['category_slug'])) {
-            throw new GraphQlInputException(__('Category Slug is required.'));
-        }
-        if ($this->_categoryItemFlag) {
-            try {
-                $this->_categoryItemFlag = 0;//get category id by slug
-            } catch (Exception $e) {
-                throw new GraphQlInputException(__($e->getMessage()));
-            }
+        if ($this->_labelFlag && !isset($args['entity_id'])) {
+            throw new GraphQlInputException(__('Label id is required.'));
         }
     }
 }
