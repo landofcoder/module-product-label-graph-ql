@@ -19,7 +19,7 @@
  * @license     https://landofcoder.com/LICENSE.txt
  */
 
-declare(strict_types=1);
+declare( strict_types=1 );
 
 namespace Lof\ProductLabelGraphQl\Model\Resolver;
 
@@ -33,8 +33,7 @@ use Lof\ProductLabel\Api\LabelRepositoryInterface;
  *
  * @package Lof\ProductLabelGraphQl\Model\Resolver
  */
-abstract class AbstractProductLabelQuery
-{
+abstract class AbstractProductLabelQuery {
     /**
      * @var SearchCriteriaBuilder
      */
@@ -51,23 +50,20 @@ abstract class AbstractProductLabelQuery
     protected $_productRepository;
 
     /**
-     * @var int
-     */
-    protected $_labelFlag;
-
-    /**
      * AbstractGift constructor.
-     * @param LabelRepositoryInterface $productLabel
+     *
+     * @param LabelRepositoryInterface   $productLabel
      * @param ProductRepositoryInterface $productRepository
      */
     public function __construct(
         SearchCriteriaBuilder $searchCriteriaBuilder,
         LabelRepositoryInterface $productLabel,
         ProductRepositoryInterface $productRepository
-    ) {
+    )
+    {
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
-        $this->_labelRepository = $productLabel;
-        $this->_productRepository = $productRepository;
+        $this->_labelRepository      = $productLabel;
+        $this->_productRepository    = $productRepository;
     }
 
     /**
@@ -75,10 +71,10 @@ abstract class AbstractProductLabelQuery
      *
      * @throws GraphQlInputException
      */
-    protected function validateArgs(array $args)
+    protected function validateArgs( array $args )
     {
-        if ($this->_labelFlag && !isset($args['entity_id'])) {
-            throw new GraphQlInputException(__('Label id is required.'));
+        if ( ! isset( $args['entity_id'] ) ) {
+            throw new GraphQlInputException( __( 'Label id is required.' ) );
         }
     }
 }

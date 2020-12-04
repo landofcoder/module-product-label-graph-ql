@@ -28,9 +28,8 @@ class LabelById extends AbstractProductLabelQuery implements ResolverInterface {
      */
     public function resolve( Field $field, $context, ResolveInfo $info, array $value = null, array $args = null )
     {
-        $this->_labelFlag = 1;
         $this->validateArgs( $args );
 
-        return $this->_labelRepository->getById( $this->_labelFlag );
+        return $this->_labelRepository->getById( $args['entity_id'] );
     }
 }
