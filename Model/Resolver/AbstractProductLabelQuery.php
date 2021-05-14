@@ -50,9 +50,9 @@ abstract class AbstractProductLabelQuery {
     protected $_productRepository;
 
     /**
-     * AbstractGift constructor.
-     *
-     * @param LabelRepositoryInterface   $productLabel
+     * AbstractProductLabelQuery constructor.
+     * @param SearchCriteriaBuilder $searchCriteriaBuilder
+     * @param LabelRepositoryInterface $productLabel
      * @param ProductRepositoryInterface $productRepository
      */
     public function __construct(
