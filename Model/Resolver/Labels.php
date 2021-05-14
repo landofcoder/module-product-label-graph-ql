@@ -46,7 +46,7 @@ class Labels extends AbstractProductLabelQuery implements ResolverInterface {
         $searchCriteria->setCurrentPage( $args['currentPage'] );
         $searchCriteria->setPageSize( $args['pageSize'] );
 
-        $searchResult = $this->_labelRepository->getList( $searchCriteria );
+        $searchResult = $this->_labelRepository->getListGraphQl( $searchCriteria );
 
         return [
             'total_count' => $searchResult->getTotalCount(),
