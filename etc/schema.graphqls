@@ -92,3 +92,7 @@ input LabelFilterInput {
     stores: FilterTypeInput @doc(description: "Stores")
     or: LabelFilterInput @doc(description: "The keyword required to perform a logical OR comparison")
 }
+
+interface ProductInterface {
+    labels: Labels @doc(description: "Labels") @resolver(class: "\\Lof\\ProductLabelGraphQl\\Model\\Resolver\\ProductAttributeSetLabelsResolver")
+}

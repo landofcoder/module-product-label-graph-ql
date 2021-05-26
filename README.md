@@ -4,10 +4,7 @@
 
  - [Main Functionalities](#markdown-header-main-functionalities)
  - [Installation](#markdown-header-installation)
- - [Configuration](#markdown-header-configuration)
- - [Specifications](#markdown-header-specifications)
- - [Attributes](#markdown-header-attributes)
-
+ - [Uses](#markdown-header-uses)
 
 ## Main Functionalities
 magento 2 product label graphql extension
@@ -35,33 +32,128 @@ magento 2 product label graphql extension
  - Flush the cache by running `php bin/magento cache:flush`
 
 
-## Configuration
+## Uses
 
+- Labels included in Product query:
+```
+{
+ products(search: "Joust Duffle Bag", pageSize: 2) {
+   total_count
+   items {
+     name
+     sku
+     labels {
+       total_count
+       items {
+         entity_id
+         name
+         exclusively
+         use_for_parent
+         price_range_enabled
+         priority
+         product_custom_css
+         product_image
+         product_image_size
+         product_label_text
+         product_label_text
+         product_position
+         product_shape
+         product_stock_enabled
+         product_text_color
+         product_text_size
+         product_type          
+         cat_custom_css
+         cat_image
+         cat_image_size
+         cat_label_color
+         cat_label_text
+         cat_position
+         cat_shape
+         cat_text_color
+         cat_text_size
+         cat_type
+         cond_serialize
+         customer_group_enabled
+         customer_group_ids
+         date_range_enabled
+         from_date
+         from_price
+         is_new
+         is_sale
+         special_price_only
+         status
+         stock_higher
+         stock_less
+         stock_more
+         stock_status
+         stores
+         to_date
+         to_price
+         by_price
+       }
+     }
+   }
+   page_info {
+     page_size
+     current_page
+   }
+ }
+}
+```
 
-
-
-## Specifications
-
- - Model
-	- Label
-
- - API Endpoint
-	- GET - Lof\ProductLabelGraphQl\Api\Lof_labelsManagementInterface > Lof\ProductLabelGraphQl\Model\Lof_labelsManagement
-
- - API Endpoint
-	- POST - Lof\ProductLabelGraphQl\Api\Lof_labelsManagementInterface > Lof\ProductLabelGraphQl\Model\Lof_labelsManagement
-
- - API Endpoint
-	- PUT - Lof\ProductLabelGraphQl\Api\Lof_labelsManagementInterface > Lof\ProductLabelGraphQl\Model\Lof_labelsManagement
-
- - API Endpoint
-	- GET - Lof\ProductLabelGraphQl\Api\Lof_labelManagementInterface > Lof\ProductLabelGraphQl\Model\Lof_labelManagement
-
- - API Endpoint
-	- DELETE - Lof\ProductLabelGraphQl\Api\Lof_labelsManagementInterface > Lof\ProductLabelGraphQl\Model\Lof_labelsManagement
-
-
-## Attributes
-
-
+- Get List Labels:
+```
+{
+  lofProductLabelList(filter: {}, pageSize: 20, currentPage: 1) {
+    total_count
+    items {
+        entity_id
+        name
+        exclusively
+        use_for_parent
+        price_range_enabled
+        priority
+        product_custom_css
+        product_image
+        product_image_size
+        product_label_text
+        product_label_text
+        product_position
+        product_shape
+        product_stock_enabled
+        product_text_color
+        product_text_size
+        product_type          
+        cat_custom_css
+        cat_image
+        cat_image_size
+        cat_label_color
+        cat_label_text
+        cat_position
+        cat_shape
+        cat_text_color
+        cat_text_size
+        cat_type
+        cond_serialize
+        customer_group_enabled
+        customer_group_ids
+        date_range_enabled
+        from_date
+        from_price
+        is_new
+        is_sale
+        special_price_only
+        status
+        stock_higher
+        stock_less
+        stock_more
+        stock_status
+        stores
+        to_date
+        to_price
+        by_price
+    }
+  }
+}
+```
 
